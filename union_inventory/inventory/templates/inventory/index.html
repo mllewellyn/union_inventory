@@ -1,6 +1,6 @@
 {% extends 'inventory/base.html' %}
 
-{% block page_title %}"Max's Inventory : Home"{% endblock %}
+{% block page_title %}Max's Inventory : Home{% endblock %}
 
 {% block content %}
 <div class="panel panel-default">
@@ -8,7 +8,6 @@
     <h3 class="panel-title">Inventories</h3>
   </div>
   <div class="panel-body">
-    <ol>
     <table class="table table-striped">
     <thead><th>Inventory Name</th><th>View</th><th>Edit</th><th>Delete</th></thead>
     {% for inventory in inventories %}
@@ -23,7 +22,10 @@
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>
         </a></td>
     {% endfor %}
-    </ol>
+    </table>
   </div>
 </div>
+
+<a class="btn btn-default" href="{% url 'inventory.views.create_inventory' %}" role="button">Create Inventory</a>
+
 {% endblock %}

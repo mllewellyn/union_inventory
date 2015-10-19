@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Inventory, Computer
 
-from .forms import InventoryForm
+from .forms import AddInventoryForm
 
 
 # Create your views here.
@@ -23,24 +23,35 @@ def view_inventory(request, inventory_id):
             'computers' : computers
         })
 
-def edit_inventory(request, inventory_id):
-    """Show the user a form to edit or create an inventory object"""
+def create_inventory(request):
+    """Show the user a form to add an inventory"""
     if request.method == "POST":
-        inventory_form = InventoryForm(request.POST)
+        inventory_form = AddInventoryForm(request.POST)
         if inventory_form.is_valid():
+            # TODO: fail if name is already in database
+
             # create new inventory object
-            print("created a new inventory object (maybe)")
-            # validate object
-            # redirect to view
-            return redirect(index)
+            new_inventory = Inventory(name=inventory_form.cleaned_data['name'])
+            print("Created a new inventory object", new_inventory)
+            new_inventory.save()
+            print("new inventory id is ", new_inventory.id)
+            return redirect(view_inventory, inventory_id=new_inventory.id)
                 
     else: # form does not exist yet, create and return it
-        inventory_form = InventoryForm()
+        inventory_form = AddInventoryForm()
 
     return render(request, 'inventory/inventory_form.html', {'inventory_form':inventory_form})
 
+def edit_inventory(request, inventory_id):
+    """Show the user a form to edit or create an inventory object"""
+    pass
+
 def delete_inventory(request, inventory_id):
     """Delete the inventory and computers belonging to it given by the id if it exists"""
+    pass
+
+def create_computer(request):
+    """Show the user a form to add a computer to an inventory"""
     pass
 
 def edit_computer(request, computer_id):

@@ -1,7 +1,15 @@
 {% extends 'inventory/base.html' %}
 {% load crispy_forms_tags %}
-{% block page_title %}"Max's Inventory : Create or edit Inventory"{% endblock %}
+{% block page_title %}Max's Inventory : Create or edit Inventory{% endblock %}
 
 {% block content %}
-    <p>Hello! Please do something with the nav that doesn't exist!</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add Inventory</h3>
+  </div>
+  <div class="panel-body">
+    {% crispy inventory_form %}
+  </div>
+</div>
+    
 {% endblock %}
