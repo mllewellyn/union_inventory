@@ -53,7 +53,7 @@ def edit_inventory(request, inventory_id):
         if form.is_valid():
             inventory.name = form.cleaned_data['name']
             inventory.save()
-            return redirect(view_inventory, inventory_id=inventory.id)
+            return redirect(index)
     else:
         form = EditInventoryForm(instance=inventory)
 
@@ -67,7 +67,9 @@ def edit_inventory(request, inventory_id):
 
 def delete_inventory(request, inventory_id):
     """Delete the inventory and computers belonging to it given by the id if it exists."""
-    pass
+    inventory = Inventory.objects.get(pk=inventory_id)
+    inventory.delete()
+    return redirect(index)
 
 def create_computer(request, inventory_id):
     """Show the user a form to add a computer to an inventory."""
@@ -101,18 +103,21 @@ def edit_computer(request, computer_id):
             computer.serial_number = form.cleaned_data['serial_number']
             computer.comments = form.cleaned_data['comments']
             computer.save()
-            return redirect(view_inventory, inventory_id=computer.inventory_id)
+            return redirect(view_inventory, inventory_id=computer.inventory.id)
     else:
         form = EditComputerForm(instance=computer)
 
 
     return render(request, 'inventory/computer_form.html',
         {
-            'inventory_id' : computer.inventory_id.id,
+            'inventory_id' : computer.inventory.id,
             'form_name' : "Add Computer",
             'form' : form
         })
 
 def delete_computer(request, computer_id):
     """Delete the computer given by the id if it exists."""
-    pass
+    computer = Computer.objects.get(pk=computer_id)
+    inv_id = computer.inventory.id
+    computer.delete()
+    return redirect(view_inventory, inventory_id=inv_id)
