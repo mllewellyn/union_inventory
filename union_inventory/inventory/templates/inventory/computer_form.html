@@ -10,7 +10,7 @@
   <div class="panel-body">
     {% crispy form %}
   </div>
-  <a class="btn btn-primary" href="{% url 'inventory.views.index' %}" role="button">
+  <a class="btn btn-primary" href="{% url 'inventory.views.view_inventory' inventory_id %}" role="button">
     <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Cancel</a>
 </div>
     

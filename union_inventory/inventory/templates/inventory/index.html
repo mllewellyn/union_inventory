@@ -16,7 +16,7 @@
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
         </a></td>
         <td><a href="{% url 'inventory.views.edit_inventory' inventory.id %}">
-            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></li>
         </a></td>
         <td><a href="{% url 'inventory.views.delete_inventory' inventory.id %}">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></li>
@@ -26,6 +26,6 @@
   </div>
 </div>
 
-<a class="btn btn-default" href="{% url 'inventory.views.create_inventory' %}" role="button">Create Inventory</a>
+<a class="btn btn-primary" href="{% url 'inventory.views.create_inventory' %}" role="button">Create Inventory</a>
 
 {% endblock %}

@@ -7,7 +7,7 @@ class Inventory(models.Model):
         return "Inventory: %s" % self.name
 
 class Computer(models.Model):
-    inventory_id = models.ForeignKey(Inventory)
+    inventory = models.ForeignKey(Inventory)
     manufacturer = models.CharField(max_length = 128)
     serial_number = models.CharField(max_length = 128)
     comments = models.TextField()
